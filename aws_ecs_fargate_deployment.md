@@ -1,24 +1,9 @@
 # AWS ECS Fargate Multi-Tier Application Deployment
 
-This guide provides step-by-step instructions to deploy a containerized, production-ready web application on **AWS ECS (Fargate)** behind an **Application Load Balancer (ALB)**, backed by an **Amazon RDS MySQL** database with automated credential rotation via **AWS Secrets Manager**.
+
 
 ---
 
-## Architecture Overview
-
-* **VPC (`10.0.0.0/16`):** Multi-AZ setup across 2 Availability Zones (`us-east-1a`, `us-east-1b`) with 6 subnets (2 Public, 2 App Private, 2 Data Private).
-* **Ingress & Load Balancing:** Internet-facing Application Load Balancer in Public Subnets forwarding HTTP (`80`) traffic to Fargate tasks.
-* **Compute:** Serverless containers running on AWS Fargate inside Private App Subnets, pulling images from a private **Amazon ECR** repository.
-* **Database & Security:** Amazon RDS MySQL isolated in Private Data Subnets, with credentials dynamically fetched and rotated via **AWS Secrets Manager**.
-
----
-
-## Prerequisites
-
-* An active AWS Account with permissions to manage VPC, EC2, ECR, ECS, RDS, Secrets Manager, and IAM.
-* Application source code repository containing a `Dockerfile`, application code, and a `/health.html` endpoint for ALB health checks.
-
----
 
 ## Step 1: Networking (VPC & Security Groups)
 
